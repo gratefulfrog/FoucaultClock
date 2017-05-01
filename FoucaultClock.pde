@@ -49,6 +49,7 @@ void draw(){
     
   }
   pendule();
+  //image(pg,0,0);
   //linear(width/2.,height/2.);
   foucault();
  }
@@ -67,11 +68,9 @@ void pendule(){
             0.0, -1.0, 0.0);
   pg.background(0);
   pg.stroke(255);
-  //pg.line (500,100,x,y);
   pg.line (500,height/2.0,500,x,height/2.0,0);
   pg.endDraw();
-  image(pg,0,0);
-  
+  image(pg,0,0);  
 }
 
 float linear(float cx, float cy){
