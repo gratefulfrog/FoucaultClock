@@ -2,6 +2,7 @@
 //FloatList corners;
 
 ArrayList corners;
+PGraphics  pg;
 
 void setup(){
   size(1000,800,P3D);
@@ -9,7 +10,8 @@ void setup(){
   stroke(255);
   fill(255,0,0);
   background(0);
-  frameRate(500);
+  frameRate(100);
+  pg = createGraphics(1000, 800,P3D);
 }
 
 float K = 0.7,
@@ -19,7 +21,9 @@ float K = 0.7,
       rt = 0,
       rtInc = radians(2.5),
       curX,
-      curY;
+      curY,
+      ccurX,
+      ccurY;
 
 boolean computed = false;
 
@@ -38,22 +42,36 @@ void draw(){
     popMatrix();
     //println(lx,rx,uy,ly);
     background(0);
+    
+    camera(500.0,-200, 300.0, // eyeX, eyeY, eyeZ
+       500.0, height/2.0, 20.0, // centerX, centerY, centerZ
+      0.0, -1.0, 0.0);
+    
   }
-  //pendule();
+  pendule();
   //linear(width/2.,height/2.);
   foucault();
-
  }
 
 void pendule(){
-  stroke(round(4*t)%256);
+  //stroke(round(4*t)%256);
   float theta = K*cos(t);
   float x = 500+L*sin(theta),
         y = 100+L*cos(theta);
-  curX=x;
-  curY=y;
-  line (500,100,x,y);
+  //ccurX=x;
+  //ccurY=y;
   t += inc;
+  pg.beginDraw();
+  pg.camera(500.0,-200, 300.0, // eyeX, eyeY, eyeZ
+            500.0, height/2.0, 20.0, // centerX, centerY, centerZ
+            0.0, -1.0, 0.0);
+  pg.background(0);
+  pg.stroke(255);
+  //pg.line (500,100,x,y);
+  pg.line (500,height/2.0,500,x,height/2.0,0);
+  pg.endDraw();
+  image(pg,0,0);
+  
 }
 
 float linear(float cx, float cy){
