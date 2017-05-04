@@ -1,9 +1,11 @@
 
-$fn=40;
-translate([4000,0,0]){
-    rotate([0,-90,0]){  
-        cylinder(h=4000,d1=20,d2=2);
-        sphere(d=30);
+$fn=100;
+rotate([0,0,90]){
+    translate([4000,0,0]){
+        rotate([0,-90,0]){  
+            cylinder(h=4000,d1=20,d2=2);
+            sphere(d=30);
+        }
     }
+    sphere(d=4);
 }
-sphere(d=4);

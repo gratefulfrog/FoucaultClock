@@ -1,22 +1,16 @@
-
+final float thetaMax = radians(30),
+            L = 3.2,//4,
+            G = 9.8,
+            maxEyeZ = 80*(height/2.0) / tan(PI/6.0);
+            
 PShape s;
 
-float eyeZ;
-float inc = -1;
-
-final int boxW = 200;
-final float pointOneDegree = radians(0.1),
-      maxEyeZ = 80*(height/2.0) / tan(PI/6.0);
-float rot = 0,
-      t=0;
 int   t0,
       lastT;
 
-boolean lastSign = false;
+float eyeZ;
 
-final float thetaMax = radians(30),
-            L = 3.2,//4,
-            G = 9.8;
+boolean lastSign = false;
 
 void setup() {
   size(1000, 800, P3D);  
@@ -24,7 +18,7 @@ void setup() {
   stroke(0);
   eyeZ = maxEyeZ;
   shapeMode(CORNER);
-  s = loadShape("pendulum_flat.obj");
+  s = loadShape("pendulum_flat_y_axis.obj");
   t0 = millis();
   lastT=millis();
   frameRate(100);
@@ -40,15 +34,21 @@ boolean positive(float f){
 
 void draw() {
   background(0);
-  
+  //ortho();
   lights();
- 
- 
-  //pushMatrix();
-  //translate(width/2., 10); //height/2.,0);
-  //rotateX(PI/2.);
-  //translate(0,0,-height/2.); 
-  //rotateX(rot);
+  camera(// camera position:
+        width/2.0, 
+        4000, 
+        eyeZ,
+        // Camera pointing at position:
+        width/2.0, 
+        4000, 
+        0, 
+        // axis which is vertically upwards
+         0,   // X
+         1,   // Y
+         0);  // Z
+  
   int curT = millis();
   float thetaC = thetaCur((curT-t0)/1000.);
   if (positive(thetaC) != lastSign){
@@ -56,39 +56,10 @@ void draw() {
     lastSign = ! lastSign;
     lastT = curT;
   }
-  //rotateY(thetaC);
-  //t+=0.02;
-  //rotateZ(rot);
-  
-  //translate(0,0,-4000); //height); 
-  
-  //translate(0,-4000,0);
-  //rotateY(rot);
-  //shape(s,0,0);
-  //box(boxW);
+
+  pushMatrix();
   translate(width/2.0,0,0);
-  rotateZ(PI/2.);
+  rotateZ(thetaC);
   shape(s,0,0);
-  //
-  /*
-  inc = eyeZ >= maxEyeZ ? -1 
-                                           : eyeZ <= boxW ? +1 
-                                                         : inc;
-  eyeZ += inc;
-  */
-  rot += pointOneDegree;
- // popMatrix();
-  //camera(// camera position:
-    //     /*mouseX, */ width/2.0, 
-      //   height, 
-        // eyeZ,
-         // Camera pointing at position:
-      //   /*mouseX, */width/2.0, 
-  //       height, 
-   //      0, 
-         // axis which is vertically upwards
-   //      0,   // X
-    //     1,   // Y
-    //     0);  // Z
-  
+  popMatrix();
 }
