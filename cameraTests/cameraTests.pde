@@ -1,7 +1,7 @@
 final float thetaMax = radians(30),
             L = 3.2,//4,
             G = 9.8,
-            maxEyeZ = 80*(height/2.0) / tan(PI/6.0);
+            maxEyeZ = 40*(height/2.0) / tan(PI/6.0);
             
 PShape s;
 
@@ -42,7 +42,7 @@ void draw() {
         eyeZ,
         // Camera pointing at position:
         width/2.0, 
-        4000, 
+        2500, 
         0, 
         // axis which is vertically upwards
          0,   // X
