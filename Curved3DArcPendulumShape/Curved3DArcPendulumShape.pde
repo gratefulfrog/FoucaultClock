@@ -59,7 +59,7 @@ PShape pendulumLine(){
     float x = 0,
           y = 0,
           z = pendulumLength*i;
-  s.vertex(x,y,z);
+    s.vertex(x,y,z);
   }
   s.endShape();
   return s;
@@ -77,7 +77,7 @@ PShape arcLine(float a, color c){
     float x = -pendulumLength*sin(i),
           y = 0,
           z = -pendulumLength*(1-cos(i));
-  s.vertex(x,y,z);
+    s.vertex(x,y,z);
   }
   s.endShape();
   return s;
