@@ -149,6 +149,11 @@ class SevenSegmentDisplay {
         //segVec[5].activate(true);
         segVec[6].activate(true);
         break;
+      default:
+        for (int i =0;i<segVec.length;i++){
+            segVec[i].activate(false);
+          }  
+        break;
     }
   }
   void display(){
